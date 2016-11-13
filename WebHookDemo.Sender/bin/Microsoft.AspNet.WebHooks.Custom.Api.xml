@@ -1,0 +1,314 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.AspNet.WebHooks.Custom.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.AspNet.WebHooks.Controllers.WebHookFiltersController">
+            <summary>
+            The <see cref="T:Microsoft.AspNet.WebHooks.Controllers.WebHookRegistrationsController"/> allows the caller to get the list of filters 
+            with which a WebHook can be registered. This enables a client to provide a user experience
+            indicating which filters can be used when registering a <see cref="T:Microsoft.AspNet.WebHooks.WebHook"/>. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Controllers.WebHookFiltersController.Get">
+            <summary>
+            Gets all WebHook filters that a user can register with. The filters indicate which WebHook
+            events that this WebHook will be notified for.
+            </summary>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the operation.</returns>
+        </member>
+        <member name="T:Microsoft.AspNet.WebHooks.Controllers.WebHookRegistrationsController">
+            <summary>
+            The <see cref="T:Microsoft.AspNet.WebHooks.Controllers.WebHookRegistrationsController"/> allows the caller to create, modify, and manage WebHooks
+            through a REST-style interface.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Controllers.WebHookRegistrationsController.Get">
+            <summary>
+            Gets all registered WebHooks for a given user.
+            </summary>
+            <returns>A collection containing the registered <see cref="T:Microsoft.AspNet.WebHooks.WebHook"/> instances for a given user.</returns>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Controllers.WebHookRegistrationsController.Lookup(System.String)">
+            <summary>
+            Looks up a registered WebHook with the given <paramref name="id"/> for a given user.
+            </summary>
+            <returns>The registered <see cref="T:Microsoft.AspNet.WebHooks.WebHook"/> instance for a given user.</returns>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Controllers.WebHookRegistrationsController.Post(Microsoft.AspNet.WebHooks.WebHook)">
+            <summary>
+            Registers a new WebHook for a given user.
+            </summary>
+            <param name="webHook">The <see cref="T:Microsoft.AspNet.WebHooks.WebHook"/> to create.</param>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Controllers.WebHookRegistrationsController.Put(System.String,Microsoft.AspNet.WebHooks.WebHook)">
+            <summary>
+            Updates an existing WebHook registration.
+            </summary>
+            <param name="id">The WebHook ID.</param>
+            <param name="webHook">The new <see cref="T:Microsoft.AspNet.WebHooks.WebHook"/> to use.</param>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Controllers.WebHookRegistrationsController.Delete(System.String)">
+            <summary>
+            Deletes an existing WebHook registration.
+            </summary>
+            <param name="id">The WebHook ID.</param>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Controllers.WebHookRegistrationsController.DeleteAll">
+            <summary>
+            Deletes all existing WebHook registrations.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Controllers.WebHookRegistrationsController.Initialize(System.Web.Http.Controllers.HttpControllerContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Controllers.WebHookRegistrationsController.VerifyFilters(Microsoft.AspNet.WebHooks.WebHook)">
+            <summary>
+            Ensure that the provided <paramref name="webHook"/> only has registered filters.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Controllers.WebHookRegistrationsController.RemovePrivateFilters(System.Collections.Generic.IEnumerable{Microsoft.AspNet.WebHooks.WebHook})">
+            <summary>
+            Removes all private filters from registered WebHooks.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Controllers.WebHookRegistrationsController.VerifyWebHook(Microsoft.AspNet.WebHooks.WebHook)">
+            <summary>
+            Ensures that the provided <paramref name="webHook"/> has a reachable Web Hook URI unless
+            the WebHook URI has a <c>NoEcho</c> query parameter.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Controllers.WebHookRegistrationsController.GetUserId">
+            <summary>
+            Gets the user ID for this request.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Controllers.WebHookRegistrationsController.CreateHttpResult(Microsoft.AspNet.WebHooks.StoreResult)">
+            <summary>
+            Creates an <see cref="T:System.Web.Http.IHttpActionResult"/> based on the provided <paramref name="result"/>.
+            </summary>
+            <param name="result">The result to use when creating the <see cref="T:System.Web.Http.IHttpActionResult"/>.</param>
+            <returns>An initialized <see cref="T:System.Web.Http.IHttpActionResult"/>.</returns>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Controllers.WebHookRegistrationsController.InvokeRegistrars(Microsoft.AspNet.WebHooks.WebHook)">
+            <summary>
+            Calls all IWebHookRegistrar instances for server side manipulation, inspection, or rejection of registrations.
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNet.WebHooks.DependencyScopeExtensions">
+            <summary>
+            Extension methods for <see cref="T:System.Web.Http.Dependencies.IDependencyScope"/> facilitating getting the services used by custom WebHooks APIs.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.DependencyScopeExtensions.GetIdValidator(System.Web.Http.Dependencies.IDependencyScope)">
+            <summary>
+            Gets an <see cref="T:Microsoft.AspNet.WebHooks.IWebHookIdValidator"/> implementation registered with the Dependency Injection engine
+            or a default implementation if none are registered.
+            </summary>
+            <param name="services">The <see cref="T:System.Web.Http.Dependencies.IDependencyScope"/> implementation.</param>
+            <returns>The registered <see cref="T:Microsoft.AspNet.WebHooks.IWebHookIdValidator"/> instance or a default implementation if none are registered.</returns>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.DependencyScopeExtensions.GetRegistrars(System.Web.Http.Dependencies.IDependencyScope)">
+            <summary>
+            Gets the set of <see cref="T:Microsoft.AspNet.WebHooks.IWebHookRegistrar"/> instances registered with the Dependency Injection engine
+            or an empty collection if none are registered.
+            </summary>
+            <param name="services">The <see cref="T:System.Web.Http.Dependencies.IDependencyScope"/> implementation.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> containing the registered instances.</returns>
+        </member>
+        <member name="T:Microsoft.AspNet.WebHooks.Filters.ValidateModelAttribute">
+            <summary>
+            Provides basic data model validation based on data annotations.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Filters.ValidateModelAttribute.OnActionExecuting(System.Web.Http.Controllers.HttpActionContext)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.AspNet.WebHooks.Properties.CustomApiResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.CustomApiResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.CustomApiResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.CustomApiResources.LaunchController_NotEnabled">
+            <summary>
+              Looks up a localized string similar to The WebHook test launcher is not enabled. To enable the test launcher for testing purposes, please set the &apos;{0}&apos; application setting to &apos;{1}&apos;. The test launcher should not be enabled in production environments..
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.CustomApiResources.RegistrationController_DeleteAllFailure">
+            <summary>
+              Looks up a localized string similar to Could not delete WebHooks due to error: {0}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.CustomApiResources.RegistrationController_DeleteFailure">
+            <summary>
+              Looks up a localized string similar to Could not delete WebHook due to error: {0}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.CustomApiResources.RegistrationController_InvalidFilters">
+            <summary>
+              Looks up a localized string similar to The following filters are not valid: &apos;{0}&apos;. A list of valid filters can be obtained from the path &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.CustomApiResources.RegistrationController_RegistrarException">
+            <summary>
+              Looks up a localized string similar to The &apos;{0}&apos; implementation of &apos;{1}&apos; caused an exception: {2}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.CustomApiResources.RegistrationController_RegistrarStatusCode">
+            <summary>
+              Looks up a localized string similar to The &apos;{0}&apos; implementation of &apos;{1}&apos; resulted in an HTTP response with status code {2}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.CustomApiResources.RegistrationController_RegistrationFailure">
+            <summary>
+              Looks up a localized string similar to Could not register WebHook due to error: {0}.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.CustomApiResources.RegistrationController_UpdateFailure">
+            <summary>
+              Looks up a localized string similar to Could not update WebHook due to error: {0}.
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNet.WebHooks.Routes.WebHookRouteNames">
+            <summary>
+            Provides a set of common route names used by the custom WebHooks Web API controllers.
+            </summary>
+        </member>
+        <member name="F:Microsoft.AspNet.WebHooks.Routes.WebHookRouteNames.FiltersGetAction">
+            <summary>
+            Provides the name of the <see cref="T:Microsoft.AspNet.WebHooks.Controllers.WebHookFiltersController"/> GET action.
+            </summary>
+        </member>
+        <member name="F:Microsoft.AspNet.WebHooks.Routes.WebHookRouteNames.RegistrationLookupAction">
+            <summary>
+            Provides the name of the <see cref="T:Microsoft.AspNet.WebHooks.Controllers.WebHookRegistrationsController"/> lookup action.
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNet.WebHooks.Services.CustomApiServices">
+            <summary>
+            Provides singleton instances of custom WebHook API services used by this module.
+            If alternative implementations are provided by a Dependency Injection engine then
+            those instances are used instead.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Services.CustomApiServices.GetIdValidator">
+            <summary>
+            Gets a default <see cref="T:Microsoft.AspNet.WebHooks.IWebHookIdValidator"/> implementation which is used if none are registered with the 
+            Dependency Injection engine.
+            </summary>
+            <returns>A default <see cref="T:Microsoft.AspNet.WebHooks.IWebHookIdValidator"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Services.CustomApiServices.SetIdValidator(Microsoft.AspNet.WebHooks.IWebHookIdValidator)">
+            <summary>
+            Sets a default <see cref="T:Microsoft.AspNet.WebHooks.IWebHookIdValidator"/> implementation which is used if none are registered with the 
+            Dependency Injection engine.
+            </summary>
+            <param name="instance">The <see cref="T:Microsoft.AspNet.WebHooks.IWebHookIdValidator"/> to use. If <c>null</c> then a default implementation is used.</param>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Services.CustomApiServices.GetRegistrars">
+            <summary>
+            Gets the set of <see cref="T:Microsoft.AspNet.WebHooks.IWebHookRegistrar"/> instances discovered by a default 
+            discovery mechanism which is used if none are registered with the Dependency Injection engine.
+            </summary>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> containing the discovered instances.</returns>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.Services.CustomApiServices.Reset">
+            <summary>
+            For testing purposes
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNet.WebHooks.DefaultWebHookIdValidator">
+            <summary>
+            Provides a default implementation of <see cref="T:Microsoft.AspNet.WebHooks.IWebHookIdValidator"/> which simply deletes any Id provided 
+            by a client and instead forces a valid Id to be created on server side.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.DefaultWebHookIdValidator.ValidateIdAsync(System.Net.Http.HttpRequestMessage,Microsoft.AspNet.WebHooks.WebHook)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.AspNet.WebHooks.IWebHookIdValidator">
+            <summary>
+            Provides an abstraction for explicitly validating WebHook Ids at the time of creation as part of the 
+            <see cref="M:Microsoft.AspNet.WebHooks.Controllers.WebHookRegistrationsController.Post(Microsoft.AspNet.WebHooks.WebHook)"/> action. By default, the unique Id
+            identifying a <see cref="T:Microsoft.AspNet.WebHooks.WebHook"/> is created automatically on the server side. This means that any Id provided
+            by a client is discarded and replaced with an Id generated on server side. To enable scenarios where the client 
+            can provide a unique <see cref="T:Microsoft.AspNet.WebHooks.WebHook"/> Id, you can register an <see cref="T:Microsoft.AspNet.WebHooks.IWebHookIdValidator"/> implementation
+            through a Dependency Engine or directly via <see cref="M:Microsoft.AspNet.WebHooks.Services.CustomApiServices.SetIdValidator(Microsoft.AspNet.WebHooks.IWebHookIdValidator)"/>. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.IWebHookIdValidator.ValidateIdAsync(System.Net.Http.HttpRequestMessage,Microsoft.AspNet.WebHooks.WebHook)">
+            <summary>
+            Validates the <see cref="P:Microsoft.AspNet.WebHooks.WebHook.Id"/> as provided by a client registering a new <see cref="T:Microsoft.AspNet.WebHooks.WebHook"/>.
+            The Id can be accepted as-is or changed as desired. If the Id is set to <c>null</c> then a valid Id 
+            is created automatically on server side.
+            </summary>
+            <param name="request">The current <see cref="T:System.Net.Http.HttpRequestMessage"/>.</param>
+            <param name="webHook">The incoming <see cref="T:Microsoft.AspNet.WebHooks.WebHook"/> to inspect, manipulate, or reject.</param>
+        </member>
+        <member name="T:Microsoft.AspNet.WebHooks.WebHookRegistrar">
+            <summary>
+            Provides an abstract base class implementation of <see cref="T:Microsoft.AspNet.WebHooks.IWebHookRegistrar"/>. An <see cref="T:Microsoft.AspNet.WebHooks.IWebHookRegistrar"/>
+            implementation can be used to change, modify, or reject WebHook registrations as they are created or updated
+            through the <see cref="T:Microsoft.AspNet.WebHooks.Controllers.WebHookRegistrationsController"/>. This can for example be used to add 
+            filters to WebHook registrations enabling broadcast notifications or specific group notifications.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.WebHookRegistrar.PrivateFilterPrefix">
+            <summary>
+            Gets a prefix indicating that a WebHook registration filter is private to the server implementation
+            and should not be made visible to the user. As WebHook registrations can be added or edited by the user, 
+            all registration filters must either be listed by an <see cref="T:Microsoft.AspNet.WebHooks.IWebHookFilterManager"/> implementation, 
+            or prefixed by <see cref="P:Microsoft.AspNet.WebHooks.WebHookRegistrar.PrivateFilterPrefix"/> in order to remain hidden from the user. 
+            Failure to do so will lead to WebHook registration updates being rejected due to unknown filters.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.WebHookRegistrar.RegisterAsync(System.Net.Http.HttpRequestMessage,Microsoft.AspNet.WebHooks.WebHook)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.AspNet.WebHooks.IWebHookRegistrar">
+            <summary>
+            Provides an abstraction for manipulating the registration flow of WebHooks as it goes through the
+            <see cref="T:Microsoft.AspNet.WebHooks.Controllers.WebHookRegistrationsController"/> class. The <see cref="T:Microsoft.AspNet.WebHooks.IWebHookRegistrar"/> allows
+            an implementation to change, modify, or reject WebHook registrations as they are created or updated.
+            This can for example be used to add filters to registrations enabling broadcast notifications
+            or specific group notifications.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.IWebHookRegistrar.RegisterAsync(System.Net.Http.HttpRequestMessage,Microsoft.AspNet.WebHooks.WebHook)">
+            <summary>
+            This method is called as part of creating or updating a <see cref="T:Microsoft.AspNet.WebHooks.WebHook"/> registration. 
+            If an <see cref="T:System.Exception"/> is thrown, then the operation is rejected. As registrations 
+            can be edited by the user, any filters added here must either be listed by an
+            <see cref="T:Microsoft.AspNet.WebHooks.IWebHookFilterManager"/> implementation, or prefixed by 
+            <see cref="P:Microsoft.AspNet.WebHooks.WebHookRegistrar.PrivateFilterPrefix"/> in order to remain hidden from the user. 
+            Failure to do so will lead to WebHook registration updates being rejected due to unknown filters.
+            </summary>
+            <param name="request">The current <see cref="T:System.Net.Http.HttpRequestMessage"/>.</param>
+            <param name="webHook">The incoming <see cref="T:Microsoft.AspNet.WebHooks.WebHook"/> to inspect, manipulate, or reject.</param>
+        </member>
+        <member name="T:System.Web.Http.HttpConfigurationExtensions">
+            <summary>
+            Extension methods for <see cref="T:System.Web.Http.HttpConfiguration"/>.
+            </summary>
+        </member>
+        <member name="M:System.Web.Http.HttpConfigurationExtensions.InitializeCustomWebHooksApis(System.Web.Http.HttpConfiguration)">
+            <summary>
+             Initializes support for registering and managing custom WebHooks through 
+             a set of ASP.NET Web APIs.
+            </summary>
+            <param name="config">The current <see cref="T:System.Web.Http.HttpConfiguration"/>config.</param>
+        </member>
+    </members>
+</doc>

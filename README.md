@@ -5,7 +5,6 @@ Microsoft ASP.NET WebHook Preview 的測試專案，Receiver 專案可透過不�
 - using Visual Studio 2015 open WebHookDemo.sln
 - WebHook 的 DB 請俢改 WebHookDemo.Sender 專案中 web.config 的 MS_SqlStoreConnectionString 設定值 
 - 建立 WebHook 的資料庫時，請先專啟始專案設定成 WebHookDemo.Sender 專案 ，然後到 Package Manager Console 中下 update-database 
-- ![update-database](https://github.com/rainmakerho/ASP.NET-WebHook-Preview-Demo/blob/master/npmInstall.png?raw=true)
 - 說明可參考:[Microsoft ASP.NET WebHook Preview](https://dotblogs.com.tw/rainmaker/2016/11/06/152425) 
 - ![UI](https://github.com/rainmakerho/ASP.NET-WebHook-Preview-Demo/blob/master/SubscribeImage.png?raw=true)
 - ![DefaultHookHandler](https://github.com/rainmakerho/ASP.NET-WebHook-Preview-Demo/blob/master/DefaultHookHandler.png?raw=true)
